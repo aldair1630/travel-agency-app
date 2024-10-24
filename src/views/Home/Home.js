@@ -21,7 +21,7 @@ function Home() {
   }, []);
 
   const handleSearch = async (formData) => {
-    const { destination, checkin, checkout } = formData;
+    const { destination, checkin /*checkout*/ } = formData;
 
     const response = await fetch(
       `https://api.aviationstack.com/v1/flights?access_key=2315abae42923844604b1cafb03c9057&date=${checkin}&destination=${destination}`
