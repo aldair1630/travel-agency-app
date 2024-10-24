@@ -51,24 +51,42 @@ function Home() {
         </div>
 
         {results && results.length > 0 && (
-          <div className="mt-10 bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-bold">Resultados de Vuelos</h2>
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {results.map((flight) => (
-              <div key={flight.flight_number} className="mt-4">
-                <h3 className="text-xl">{flight.flight_number}</h3>
-                <p>Origen: {flight.departure.airport}</p>
-                <p>Destino: {flight.arrival.airport}</p>
-                <p>Salida: {flight.departure.estimated}</p>
-                <p>Llegada: {flight.arrival.estimated}</p>
-                <p>Aerolínea: {flight.airline.name}</p>
-                <p>Estado: {flight.flight_status}</p>
+              <div
+                key={flight.flight_number}
+                className="bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105"
+              >
+                <h3 className="text-xl font-semibold">
+                  {flight.flight_number}
+                </h3>
+                <p className="text-gray-600">
+                  Origen: {flight.departure.airport}
+                </p>
+                <p className="text-gray-600">
+                  Destino: {flight.arrival.airport}
+                </p>
+                <p className="text-gray-600">
+                  Salida:{" "}
+                  {new Date(flight.departure.estimated).toLocaleString()}
+                </p>
+                <p className="text-gray-600">
+                  Llegada: {new Date(flight.arrival.estimated).toLocaleString()}
+                </p>
+                <p className="text-gray-600">
+                  Aerolínea: {flight.airline.name}
+                </p>
+                <p
+                  className={`text-gray-600 ${
+                    flight.flight_status === "active"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  Estado: {flight.flight_status}
+                </p>
               </div>
             ))}
-          </div>
-        )}
-        {results && results.length === 0 && (
-          <div className="mt-10 bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-bold">No se encontraron vuelos</h2>
           </div>
         )}
       </main>
