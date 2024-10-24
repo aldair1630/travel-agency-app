@@ -5,22 +5,33 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./context/AuthContext";
+import PublicRoute from "./components/PublicRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const location = useLocation();
+
   return (
     <div className="App">
       <AuthProvider>
-      {location.pathname !== "/" && <NavBar />}
+        {location.pathname !== "/" && <NavBar />}
         <Routes>
           <Route exact path="/" element={<Page />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/destinations" element={<Destinations />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+
+          {/* Rutas privadas */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/destinations" element={<Destinations />} />
+            <Route path="/about" element={<About />} />
+          </Route>
+
+          {/* Rutas públicas */}
+          <Route element={<PublicRoute restricted />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
         </Routes>
-      {location.pathname !== "/" && <Footer />}
+        {location.pathname !== "/" && <Footer />}
       </AuthProvider>
     </div>
   );
