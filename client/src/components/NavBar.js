@@ -1,9 +1,12 @@
-// client/src/components/NavBar.js
+// NavBar.js
 import React from "react";
 import logo from "../img/logo.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // Importar el contexto de autenticación
 
 const NavBar = () => {
+  const { user, logout } = useAuth(); // Obtener el usuario y la función de logout
+
   return (
     <nav className="bg-blue-600 p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -20,7 +23,7 @@ const NavBar = () => {
                 marginRight: "10px",
               }}
             />
-            <div className="text-white text-2xl font-bold">Travels CAAL </div>
+            <div className="text-white text-2xl font-bold">Travels CAAL</div>
           </div>
         </Link>
         <ul className="flex space-x-4">
@@ -39,11 +42,29 @@ const NavBar = () => {
               About
             </Link>
           </li>
-          <li>
-            <Link to="/login" className="text-white hover:text-gray-200">
-              Login
-            </Link>
-          </li>
+          {user ? ( // Verificar si hay un usuario autenticado
+            <>
+              <li>
+                <span className="text-white">
+                  Hola, {user.displayName || user.email}
+                </span>
+              </li>
+              <li>
+                <button
+                  onClick={logout}
+                  className="text-white hover:text-gray-200"
+                >
+                  Cerrar sesión
+                </button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to="/login" className="text-white hover:text-gray-200">
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
