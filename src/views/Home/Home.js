@@ -6,7 +6,6 @@ function Home() {
   const [results, setResults] = useState(null);
   const [destinos, setDestinos] = useState([]);
 
-  // Obtener los destinos al cargar la página
   useEffect(() => {
     const fetchDestinos = async () => {
       try {
@@ -22,13 +21,18 @@ function Home() {
   }, []);
 
   const handleSearch = async (formData) => {
-    const response = await fetch("http://localhost:5000/search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    const { destination, checkin, checkout } = formData;
+
+    const response = await fetch(
+      `https://api.aviationstack.com/v1/flights?access_key=2315abae42923844604b1cafb03c9057&date=${checkin}&destination=${destination}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al buscar vuelos");
+    }
+
     const data = await response.json();
-    setResults(data);
+    setResults(data.data);
   };
 
   return (
@@ -41,20 +45,30 @@ function Home() {
           </p>
         </div>
       </header>
-
       <main className="container mx-auto py-10">
-        {/* Formulario de búsqueda */}
         <div className="bg-white shadow-md rounded-lg p-6">
           <SearchForm onSearch={handleSearch} destinos={destinos} />
         </div>
 
-        {/* Resultados de la búsqueda */}
-        {results && (
+        {results && results.length > 0 && (
           <div className="mt-10 bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-bold">Resultados</h2>
-            <pre className="mt-4 text-gray-700">
-              {JSON.stringify(results, null, 2)}
-            </pre>
+            <h2 className="text-2xl font-bold">Resultados de Vuelos</h2>
+            {results.map((flight) => (
+              <div key={flight.flight_number} className="mt-4">
+                <h3 className="text-xl">{flight.flight_number}</h3>
+                <p>Origen: {flight.departure.airport}</p>
+                <p>Destino: {flight.arrival.airport}</p>
+                <p>Salida: {flight.departure.estimated}</p>
+                <p>Llegada: {flight.arrival.estimated}</p>
+                <p>Aerolínea: {flight.airline.name}</p>
+                <p>Estado: {flight.flight_status}</p>
+              </div>
+            ))}
+          </div>
+        )}
+        {results && results.length === 0 && (
+          <div className="mt-10 bg-white shadow-md rounded-lg p-6">
+            <h2 className="text-2xl font-bold">No se encontraron vuelos</h2>
           </div>
         )}
       </main>

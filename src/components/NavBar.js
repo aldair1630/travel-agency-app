@@ -1,11 +1,16 @@
 // NavBar.js
-import React from "react";
+import React, { useState } from "react";
 import logo from "../img/logo.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; // Importar el contexto de autenticación
 
 const NavBar = () => {
   const { user, logout } = useAuth(); // Obtener el usuario y la función de logout
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <nav className="bg-blue-600 p-4">
@@ -26,7 +31,21 @@ const NavBar = () => {
             <div className="text-white text-2xl font-bold">Travels CAAL</div>
           </div>
         </Link>
-        <ul className="flex space-x-4">
+
+        {/* Icono de menú */}
+        <div className="md:hidden" onClick={toggleMenu}>
+          <div className="text-white cursor-pointer">
+            <span className="block w-6 h-0.5 bg-white mb-1"></span>
+            <span className="block w-6 h-0.5 bg-white mb-1"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+          </div>
+        </div>
+
+        <ul
+          className={`flex-row justify-end text-center absolute md:static bg-blue-600 md:flex md:space-x-4 transition-all duration-300 ease-in-out ${
+            isOpen ? "top-16 -ml-4 w-full" : "top-[-200px]"
+          } md:top-0`}
+        >
           <li>
             <Link to="/home" className="text-white hover:text-gray-200">
               Home
