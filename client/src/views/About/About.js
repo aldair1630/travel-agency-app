@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import alvaroImage from "../../img/alvaro.png";
+import leoImage from "../../img/leo.png";
+import caledImage from "../../img/Caled.png";
+import aldairImage from "../../img/aldair.jpg";
 
 function About() {
   const [formData, setFormData] = useState({
@@ -40,6 +44,7 @@ function About() {
           fácil y agradable posible.
         </p>
       </div>
+
       <h3 className="text-2xl mt-8 mb-4 text-center">Contáctanos</h3>
       <form
         onSubmit={handleSubmit}
@@ -78,6 +83,45 @@ function About() {
           Enviar Mensaje
         </button>
       </form>
+
+      {/* Sección de participantes */}
+      <h3 className="text-2xl mt-8 mb-4 text-center">
+        Participantes del Proyecto
+      </h3>
+      <div className="flex flex-wrap justify-center gap-6">
+        {[
+          {
+            name: "Álvaro Fernando Higuera Romero",
+            image: alvaroImage,
+          },
+          {
+            name: "Leonardo Daniel García Rubio",
+            image: leoImage,
+          },
+          {
+            name: "Caled Alvarado de la Ossa",
+            image: caledImage,
+          },
+          {
+            name: "Aldair Rodríguez Beitar",
+            image: aldairImage,
+          },
+        ].map((participant, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105"
+          >
+            <img
+              src={participant.image}
+              alt={participant.name}
+              className="w-24 h-24 rounded-full mb-2 border-4 border-blue-600"
+            />
+            <span className="text-lg font-semibold text-gray-800">
+              {participant.name}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
