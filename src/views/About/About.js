@@ -109,14 +109,15 @@ function About() {
         ].map((participant, index) => (
           <div
             key={index}
-            className="flex flex-col items-center bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105"
+            className="flex flex-col items-center bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105 w-48" //añadido w-48 para que todas las tarjetas tengan el mismo ancho
           >
             <img
               src={participant.image}
               alt={participant.name}
               className="w-24 h-24 rounded-full mb-2 border-4 border-blue-600"
             />
-            <span className="text-lg font-semibold text-gray-800">
+
+            <span className="text-lg font-semibold text-gray-800 h-full flex items-center">
               {participant.name}
             </span>
           </div>
