@@ -22,13 +22,13 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/home" element={<Home />} />
             <Route path="/destinations" element={<Destinations />} />
-            <Route path="/about" element={<About />} />
           </Route>
 
           {/* Rutas públicas */}
           <Route element={<PublicRoute restricted />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<About />} />
           </Route>
         </Routes>
         {location.pathname !== "/" && <Footer />}
