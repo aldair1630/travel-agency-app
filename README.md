@@ -7,6 +7,7 @@ Aplicación web para una agencia de viajes moderna con autenticación de usuario
 ![Preview de la aplicación](./public/preview.png) <!-- Agrega imagen real si tienes -->
 
 ## 🚀 Características principales
+
 - Sistema completo de autenticación (registro/login)
 - Página principal con ofertas destacadas
 - Catálogo interactivo de destinos turísticos
@@ -16,23 +17,28 @@ Aplicación web para una agencia de viajes moderna con autenticación de usuario
 - Sistema de contactos integrado
 
 ## 📋 Requisitos previos
+
 - Node.js v16+
 - npm v8+
 - Git (opcional pero recomendado)
 
 ## ⚙️ Instalación
+
 1. Clonar repositorio:
+
 ```bash
 git clone https://github.com/aldair1630/travel-agency-app.git
 cd travel-agency-app
 ```
 
 1. Instalar Dependencias:
+
 ```bash
 npm install
 ```
 
 1. Iniciar Aplicación:
+
 ```bash
 npm start
 ```
@@ -40,7 +46,9 @@ npm start
 La aplicación estará disponible en: http://localhost:3000
 
 ## 🔐 Sistema de Autenticación
+
 Componentes clave:
+
 - `AuthContext.js`: Maneja el estado global de autenticación
 - `PrivateRoute.js`: Protege rutas para usuarios autenticados
 - `PublicRoute.js`: Restringe acceso a rutas públicas cuando hay sesión activa
@@ -53,18 +61,20 @@ Componentes clave:
 ```
 
 ## 🌍 Principales Vistas
-| Ruta              | Descripción                          | Acceso         |
-|-------------------|--------------------------------------|----------------|
-| `/`               | Página principal         | Público        |
-| `/login`       | Inicio de sesión de usuarios    | Público        |
-| `/about`       | Informacion sobre nosotros    | Público        |
-| `/register`          | Registro de nueva cuenta            | No autenticado |
-| `/home`      | Pagina de inicio  | No autenticado    |
-| `/reservas`       | Historial y gestión de reservas      | Autenticado    |
+
+| Ruta            | Descripción                     | Acceso         |
+| --------------- | ------------------------------- | -------------- |
+| `/`             | Página principal                | Público        |
+| `/about`        | Informacion sobre nosotros      | Público        |
+| `/login`        | Inicio de sesión de usuarios    | No autenticado |
+| `/register`     | Registro de nueva cuenta        | No autenticado |
+| `/home`         | Pagina de inicio                | Autenticado    |
+| `/destinations` | Historial y gestión de reservas | Autenticado    |
 
 Catálogo interactivo de destinos
 
 ## 🛠 Tecnologías utilizadas
+
 - `React 18` - Biblioteca principal frontend
 - `React Router 6` - Manejo de navegación
 - `Context API` - Gestión de estado global
@@ -117,6 +127,7 @@ SOFTWARE.
 ```
 
 ## 📌 Notas importantes
-- Dar creditos a `aldair1630` 
+
+- Dar creditos a `aldair1630`
 - Este documento debe llamarse **LICENSE.md** en la raíz del proyecto
 - Versión compatible con [OSI](https://opensource.org/licenses/MIT)
