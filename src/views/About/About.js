@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { GrUserFemale } from "react-icons/gr";
+import { FaPlane, FaHeart, FaGlobe } from "react-icons/fa";
 import alvaroImage from "../../img/alvaro.png";
-import leoImage from "../../img/leo.png";
-import caledImage from "../../img/Caled.png";
 import aldairImage from "../../img/aldair.jpg";
 
 function About() {
@@ -27,6 +27,7 @@ function About() {
       <h2 className="text-3xl mt-4 text-center">Sobre Nosotros</h2>
       <div className="max-w-4xl w-full">
         <p className="text-lg text-center mt-4 px-4 break-words">
+          <FaPlane className="inline-block text-blue-600 mr-2" />
           Somos una agencia de viajes dedicada a ofrecer experiencias únicas y
           memorables. Con años de experiencia en la industria, nuestro objetivo
           es ayudar a nuestros clientes a explorar el mundo y disfrutar de
@@ -36,12 +37,14 @@ function About() {
           culturas.
         </p>
         <p className="text-lg text-center mt-4 px-4 break-words">
+          <FaHeart className="inline-block text-red-600 mr-2" />
           Nuestro equipo de expertos está siempre disponible para ofrecer
           asesoramiento personalizado y recomendaciones adaptadas a tus
           necesidades. Nos apasiona viajar y queremos compartir esa pasión
           contigo. Ya sea que estés buscando un destino exótico o una escapada
           de fin de semana, estamos aquí para hacer que tu viaje sea lo más
           fácil y agradable posible.
+          <FaGlobe className="inline-block text-green-600 ml-2" />
         </p>
       </div>
 
@@ -95,12 +98,8 @@ function About() {
             image: alvaroImage,
           },
           {
-            name: "Leonardo Daniel García Rubio",
-            image: leoImage,
-          },
-          {
-            name: "Caled Alvarado de la Ossa",
-            image: caledImage,
+            name: "Eliana Maria Velez Restrepo",
+            icon: <GrUserFemale className="w-24 h-24 text-blue-600 mb-2" />,
           },
           {
             name: "Aldair Rodríguez Beitar",
@@ -111,11 +110,15 @@ function About() {
             key={index}
             className="flex flex-col items-center bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105 w-48" //añadido w-48 para que todas las tarjetas tengan el mismo ancho
           >
-            <img
-              src={participant.image}
-              alt={participant.name}
-              className="w-24 h-24 rounded-full mb-2 border-4 border-blue-600"
-            />
+            {participant.image ? (
+              <img
+                src={participant.image}
+                alt={participant.name}
+                className="w-24 h-24 rounded-full mb-2 border-4 border-blue-600"
+              />
+            ) : (
+              participant.icon
+            )}
 
             <span className="text-lg font-semibold text-gray-800 h-full flex items-center">
               {participant.name}

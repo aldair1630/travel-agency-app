@@ -17,6 +17,8 @@ function App() {
         {location.pathname !== "/" && <NavBar />}
         <Routes>
           <Route exact path="/" element={<Page />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
 
           {/* Rutas privadas */}
           <Route element={<PrivateRoute />}>
@@ -28,7 +30,6 @@ function App() {
           <Route element={<PublicRoute restricted />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/about" element={<About />} />
           </Route>
         </Routes>
         {location.pathname !== "/" && <Footer />}
