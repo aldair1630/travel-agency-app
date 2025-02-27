@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# Agencia de Viajes - Aplicación React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicación web para una agencia de viajes moderna con autenticación de usuarios, catálogo de destinos y sistema de reservas.
 
-## Available Scripts
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-In the project directory, you can run:
+![Preview de la aplicación](./public/preview.png) <!-- Agrega imagen real si tienes -->
 
-### `npm start`
+## 🚀 Características principales
+- Sistema completo de autenticación (registro/login)
+- Página principal con ofertas destacadas
+- Catálogo interactivo de destinos turísticos
+- Sistema de reservas integrado
+- Panel de usuario personalizado
+- Administración de reservas (para usuarios registrados)
+- Sistema de contactos integrado
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📋 Requisitos previos
+- Node.js v16+
+- npm v8+
+- Git (opcional pero recomendado)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙️ Instalación
+1. Clonar repositorio:
+```bash
+git clone https://github.com/aldair1630/travel-agency-app.git
+cd travel-agency-app
+```
 
-### `npm test`
+1. Instalar Dependencias:
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Iniciar Aplicación:
+```bash
+npm start
+```
 
-### `npm run build`
+La aplicación estará disponible en: http://localhost:3000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔐 Sistema de Autenticación
+Componentes clave:
+- `AuthContext.js`: Maneja el estado global de autenticación
+- `PrivateRoute.js`: Protege rutas para usuarios autenticados
+- `PublicRoute.js`: Restringe acceso a rutas públicas cuando hay sesión activa
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```jsx
+// Ejemplo de ruta protegida
+<PrivateRoute path="/destionations">
+  <Destinations />
+</PrivateRoute>
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🌍 Principales Vistas
+| Ruta              | Descripción                          | Acceso         |
+|-------------------|--------------------------------------|----------------|
+| `/`               | Página principal         | Público        |
+| `/login`       | Inicio de sesión de usuarios    | Público        |
+| `/about`       | Informacion sobre nosotros    | Público        |
+| `/register`          | Registro de nueva cuenta            | No autenticado |
+| `/home`      | Pagina de inicio  | No autenticado    |
+| `/reservas`       | Historial y gestión de reservas      | Autenticado    |
 
-### `npm run eject`
+Catálogo interactivo de destinos
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🛠 Tecnologías utilizadas
+- `React 18` - Biblioteca principal frontend
+- `React Router 6` - Manejo de navegación
+- `Context API` - Gestión de estado global
+- `Axios` - Cliente HTTP para APIs
+- `Formik + Yup` - Manejo de formularios y validaciones
+- `Lucide Icons` - Iconografía moderna
+- `Tailwind CSS 3` - Sistema de estilos utility-first
+- `Vite` - Bundler y entorno de desarrollo
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Licencia MIT
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Copyright (c) 2024 [Tu Nombre o Nombre de la Organización]**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia
+de este software y los archivos de documentación asociados (el "Software"), para tratar
+en el Software sin restricción, incluyendo sin limitación los derechos
+de uso, copia, modificación, fusión, publicar, distribuir, sublicenciar y/o vender
+copias del Software, y para permitir a las personas a las que se les proporcione el Software
+hacerlo, sujeto a las siguientes condiciones:
 
-## Learn More
+El aviso de copyright anterior y este aviso de permiso se incluirán en todas
+las copias o partes sustanciales del Software.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📜 Texto legal completo (Inglés)
 
-### Code Splitting
+```text
+MIT License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Copyright (c) 2024 [Your Name or Organization Name]
 
-### Analyzing the Bundle Size
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-### Making a Progressive Web App
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📌 Notas importantes
+- Dar creditos a `aldair1630` 
+- Este documento debe llamarse **LICENSE.md** en la raíz del proyecto
+- Versión compatible con [OSI](https://opensource.org/licenses/MIT)
