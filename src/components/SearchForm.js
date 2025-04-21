@@ -12,34 +12,57 @@ const SearchForm = ({ onSearch }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [destinos, setDestinos] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [filteredCities, setFilteredCities] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
-    const fetchDestinos = async () => {
+    const fetchCities = async () => {
       try {
-        const response = await axios.get("https://restcountries.com/v3.1/all");
-        const countries = response.data.map((country) => ({
-          name: country.name.common,
-          region: country.region,
+        const response = await axios.get(
+          "https://countriesnow.space/api/v0.1/countries/population/cities"
+        );
+
+        const cityList = response.data.data.map((city) => ({
+          name: city.city,
+          country: city.country,
         }));
 
-        // Ordenar los países alfabéticamente
-        countries.sort((a, b) => a.name.localeCompare(b.name));
-
-        setDestinos(countries);
+        cityList.sort((a, b) => a.name.localeCompare(b.name));
+        setCities(cityList);
       } catch (err) {
-        setError("Error al cargar destinos.");
+        console.error(err);
+        setError("Error al cargar ciudades.");
       }
     };
 
-    fetchDestinos();
+    fetchCities();
   }, []);
 
+  const handleCityInputChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setFormData({ ...formData, destination: e.target.value });
+
+    if (query) {
+      const filtered = cities.filter((city) =>
+        city.name.toLowerCase().includes(query)
+      );
+      setFilteredCities(filtered);
+      setShowSuggestions(true);
+    } else {
+      setFilteredCities([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleSuggestionClick = (cityName) => {
+    setFormData({ ...formData, destination: cityName });
+    setFilteredCities([]);
+    setShowSuggestions(false);
+  };
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const validateForm = () => {
@@ -52,7 +75,7 @@ const SearchForm = ({ onSearch }) => {
       return false;
     }
     if (new Date(formData.checkin) >= new Date(formData.checkout)) {
-      setError("La fecha de entrada debe ser anterior a la fecha de salida.");
+      setError("La fecha de entrada debe ser anterior a la de salida.");
       return false;
     }
     setError("");
@@ -67,30 +90,41 @@ const SearchForm = ({ onSearch }) => {
     try {
       await onSearch(formData);
     } catch (err) {
-      setError("Error al buscar disponibilidad. Inténtalo de nuevo.");
+      setError("Error al buscar disponibilidad. Intenta de nuevo.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 relative">
       {error && <div className="text-red-500">{error}</div>}
       <div className="flex flex-col">
-        <label className="mb-2 font-semibold text-gray-700">Destino:</label>
-        <select
+        <label className="mb-2 font-semibold text-gray-700">
+          Ciudad destino:
+        </label>
+        <input
+          type="text"
           name="destination"
           value={formData.destination}
-          onChange={handleChange}
+          onChange={handleCityInputChange}
           className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Selecciona un destino</option>
-          {destinos.map((destino, index) => (
-            <option key={index} value={destino.name}>
-              {destino.name} - {destino.region}
-            </option>
-          ))}
-        </select>
+          placeholder="Escribe el nombre de la ciudad"
+          autoComplete="off"
+        />
+        {showSuggestions && filteredCities.length > 0 && (
+          <ul className="absolute z-10 bg-white border border-gray-300 mt-20 max-h-48 overflow-y-auto rounded-md shadow-lg w-full">
+            {filteredCities.map((city, index) => (
+              <li
+                key={index}
+                onClick={() => handleSuggestionClick(city.name)}
+                className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+              >
+                {city.name}, {city.country}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div className="flex flex-col">

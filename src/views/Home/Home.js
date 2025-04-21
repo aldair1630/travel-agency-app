@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "../../components/SearchForm";
 
 function Home() {
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);
   const [destinos, setDestinos] = useState([]);
 
   useEffect(() => {
@@ -21,18 +21,40 @@ function Home() {
   }, []);
 
   const handleSearch = async (formData) => {
-    const { destination, checkin /*checkout*/ } = formData;
+    const { destination, checkin } = formData;
 
-    const response = await fetch(
-      `https://api.aviationstack.com/v1/flights?access_key=2315abae42923844604b1cafb03c9057&date=${checkin}&destination=${destination}`
-    );
+    try {
+      const response = await fetch(
+        `https://api.aviationstack.com/v1/flights?access_key=2315abae42923844604b1cafb03c9057&date=${checkin}`
+      );
 
-    if (!response.ok) {
-      throw new Error("Error al buscar vuelos");
+      if (!response.ok) {
+        throw new Error("Error al buscar vuelos");
+      }
+
+      const data = await response.json();
+
+      // Normalizar la ciudad seleccionada en el formulario
+      const ciudadNormalizada = destination.toLowerCase().trim();
+
+      // Filtrar vuelos por ciudad (origen o destino)
+      const vuelosFiltrados = data.data.filter((flight) => {
+        // Normalizar los nombres de las ciudades de origen y destino
+        const ciudadOrigen = flight.departure?.airport?.toLowerCase() || "";
+        const ciudadDestino = flight.arrival?.airport?.toLowerCase() || "";
+
+        // Verificar coincidencia (puede ser origen o destino)
+        return (
+          ciudadOrigen.includes(ciudadNormalizada) ||
+          ciudadDestino.includes(ciudadNormalizada)
+        );
+      });
+
+      setResults(vuelosFiltrados);
+    } catch (error) {
+      console.error("Error buscando vuelos:", error);
+      setResults([]);
     }
-
-    const data = await response.json();
-    setResults(data.data);
   };
 
   return (
@@ -50,34 +72,39 @@ function Home() {
           <SearchForm onSearch={handleSearch} destinos={destinos} />
         </div>
 
-        {results && results.length > 0 && (
+        {results.length > 0 && (
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {results.map((flight) => (
               <div
-                key={flight.flight_number}
+                key={`${flight.flight.iata}-${flight.departure?.scheduled}`}
                 className="bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105"
               >
                 <h3 className="text-xl font-semibold">
-                  {flight.flight_number}
+                  Vuelo {flight.flight.number || flight.flight.iata}
                 </h3>
                 <p className="text-gray-600">
-                  Origen: {flight.departure.airport}
+                  Origen: {flight.departure.airport} ({flight.departure.iata})
                 </p>
                 <p className="text-gray-600">
-                  Destino: {flight.arrival.airport}
+                  Destino: {flight.arrival.airport} ({flight.arrival.iata})
                 </p>
                 <p className="text-gray-600">
                   Salida:{" "}
-                  {new Date(flight.departure.estimated).toLocaleString()}
+                  {new Date(
+                    flight.departure.estimated || flight.departure.scheduled
+                  ).toLocaleString()}
                 </p>
                 <p className="text-gray-600">
-                  Llegada: {new Date(flight.arrival.estimated).toLocaleString()}
+                  Llegada:{" "}
+                  {new Date(
+                    flight.arrival.estimated || flight.arrival.scheduled
+                  ).toLocaleString()}
                 </p>
                 <p className="text-gray-600">
-                  Aerolínea: {flight.airline.name}
+                  Aerolínea: {flight.airline.name || "Desconocida"}
                 </p>
                 <p
-                  className={`text-gray-600 ${
+                  className={`${
                     flight.flight_status === "active"
                       ? "text-green-500"
                       : "text-red-500"
@@ -88,6 +115,12 @@ function Home() {
               </div>
             ))}
           </div>
+        )}
+
+        {results.length === 0 && (
+          <p className="text-center text-gray-500 mt-8">
+            No se encontraron vuelos para esa ciudad y fecha.
+          </p>
         )}
       </main>
     </div>
