@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { GrUserFemale } from "react-icons/gr";
 import { FaPlane, FaHeart, FaGlobe } from "react-icons/fa";
 import alvaroImage from "../../img/alvaro.png";
 import aldairImage from "../../img/aldair.jpg";
@@ -96,10 +95,6 @@ function About() {
           {
             name: "Álvaro Fernando Higuera Romero",
             image: alvaroImage,
-          },
-          {
-            name: "Eliana Maria Velez Restrepo",
-            icon: <GrUserFemale className="w-24 h-24 text-blue-600 mb-2" />,
           },
           {
             name: "Aldair Rodríguez Beitar",
