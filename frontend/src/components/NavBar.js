@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import logo from "../img/logo.png";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // Importar el contexto de autenticación
+import { useAuth } from "../context/AuthContext";
 
 const NavBar = () => {
-  const { user, logout } = useAuth(); // Obtener el usuario y la función de logout
+  const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -61,11 +61,18 @@ const NavBar = () => {
               About
             </Link>
           </li>
-          {user ? ( // Verificar si hay un usuario autenticado
+          {user && (
+            <li>
+              <Link to="/mis-planes" className="text-white hover:text-gray-200">
+                Mis Vuelos / Planes
+              </Link>
+            </li>
+          )}
+          {user ? (
             <>
               <li>
                 <span className="text-white">
-                  Hola, {user.displayName || user.email}
+                  Hola, {user.displayName || user.name || user.email}
                 </span>
               </li>
               <li>

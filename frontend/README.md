@@ -84,12 +84,15 @@ Catálogo interactivo de destinos
 - `Tailwind CSS 3` - Sistema de estilos utility-first
 - `Vite` - Bundler y entorno de desarrollo
 
-# Licencia MIT
+# 📜 Licencia MIT
 
-**Copyright (c) 2024 [Tu Nombre o Nombre de la Organización]**
+```text
+MIT License
+
+**Copyright (c) 2024 Travel Agency**
 
 Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia
-de este software y los archivos de documentación asociados (el "Software"), para tratar
+de este software y los archivos de documentación asociados (travel agency), para tratar
 en el Software sin restricción, incluyendo sin limitación los derechos
 de uso, copia, modificación, fusión, publicar, distribuir, sublicenciar y/o vender
 copias del Software, y para permitir a las personas a las que se les proporcione el Software
@@ -98,17 +101,18 @@ hacerlo, sujeto a las siguientes condiciones:
 El aviso de copyright anterior y este aviso de permiso se incluirán en todas
 las copias o partes sustanciales del Software.
 
----
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO LIMITÁNDOSE A LAS GARANTÍAS DE COMERCIABILIDAD, ADECUACIÓN A UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO LOS AUTORES O TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA RESPONSABILIDAD, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O DE OTRA MANERA, QUE SURJA DE, O EN RELACIÓN CON EL SOFTWARE O EL USO O OTRAS NEGOCIACIONES EN EL SOFTWARE.
+```
 
 ## 📜 Texto legal completo (Inglés)
 
 ```text
 MIT License
 
-Copyright (c) 2024 [Your Name or Organization Name]
+Copyright (c) 2024 Travel Agency
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
+of this software and associated documentation files (travel agency), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
@@ -128,6 +132,6 @@ SOFTWARE.
 
 ## 📌 Notas importantes
 
-- Dar creditos a `aldair1630`
+- Dar creditos a `aldair1630` y `ALVfer66`
 - Este documento debe llamarse **LICENSE.md** en la raíz del proyecto
 - Versión compatible con [OSI](https://opensource.org/licenses/MIT)
