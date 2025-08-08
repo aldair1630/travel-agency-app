@@ -135,7 +135,7 @@ La aplicación estará disponible en [http://localhost:3000](http://localhost:30
 
 ## 📸 Capturas de pantalla
 
-![Screenshot Student App](/login.png)
+![Screenshot Student App](/Login.png)
 ![Screenshot Student App](/Register.png)
 ![Screenshot Student App](/Busqueda.png)
 ![Screenshot Student App](/Panel%20de%20usuario.png)
